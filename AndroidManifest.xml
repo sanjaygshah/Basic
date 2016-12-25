@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 *********************************************************************************
 BASIC! is an implementation of the Basic programming language for
 Android devices.
@@ -26,14 +24,17 @@ This file is part of BASIC! for Android
 
 **********************************************************************************
 -->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.rfo.basic"
+    android:installLocation="auto"
     android:versionCode="1901"
     android:versionName="1.90.01"
-    android:installLocation="auto"
-    tools:ignore="UnusedAttribute"> <!-- installLocation not available in API 7 -->
+    tools:ignore="UnusedAttribute">
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="18" /> <!-- installLocation not available in API 7 -->
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -42,7 +43,7 @@ This file is part of BASIC! for Android
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -59,29 +60,49 @@ This file is part of BASIC! for Android
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
 
-    <uses-feature android:name="android.hardware.telephony" android:required="false" />
-    <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
-    <uses-feature android:name="android.hardware.location" android:required="false" />
-    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-feature android:name="android.hardware.microphone" android:required="false" />
-    <uses-feature android:name="android.hardware.location.network" android:required="false" />
-    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
-    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
-
-    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="18" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
 
     <supports-screens android:xlargeScreens="true" />
 
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/icon"
-        android:label="@string/app_name" >
+        android:label="@string/app_name">
         <receiver
             android:name=".BootUpReceiver"
-            android:enabled="false" >
+            android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
 
@@ -91,17 +112,15 @@ This file is part of BASIC! for Android
 
         <activity
             android:id="@+id/basic_screen"
-            android:name="Basic"
+            android:name=".Basic"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name" >
-
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -113,12 +132,10 @@ This file is part of BASIC! for Android
                 <data android:host="*" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="LauncherShortcuts"
+            android:name=".LauncherShortcuts"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="Launcher Shortcuts" >
-
+            android:label="Launcher Shortcuts">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -127,9 +144,9 @@ This file is part of BASIC! for Android
         </activity>
 
         <activity-alias
-            android:name="CreateShortcuts"
+            android:name=".CreateShortcuts"
             android:label="Launcher Shortcuts"
-            android:targetActivity="LauncherShortcuts" >
+            android:targetActivity=".LauncherShortcuts">
 
             <!-- This intent-filter allows your shortcuts to be created in the launcher. -->
             <intent-filter>
@@ -142,133 +159,132 @@ This file is part of BASIC! for Android
         <activity
             android:id="@+id/editor_screen"
             android:name=".Editor"
-            android:label="@string/editor_name"
-            android:hardwareAccelerated="false" >
-        </activity>
-
+            android:hardwareAccelerated="false"
+            android:label="@string/editor_name"></activity>
         <activity
             android:id="@+id/settings_screen"
-            android:name="Settings"
-            android:label="@string/settings_name" >
-        </activity>
-
+            android:name=".Settings"
+            android:label="@string/settings_name"></activity>
         <activity
             android:id="@+id/load_screen"
-            android:name="LoadFile"
+            android:name=".LoadFile"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="@string/load_name" >
-        </activity>
-
+            android:label="@string/load_name"></activity>
         <activity
             android:id="@+id/delete_screen"
-            android:name="Delete"
+            android:name=".Delete"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="@string/delete_name" >
-        </activity>
-
+            android:label="@string/delete_name"></activity>
         <activity
             android:id="@+id/run_screen"
-            android:name="Run"
+            android:name=".Run"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="@string/run_name" >
-        </activity>
-
+            android:label="@string/run_name"></activity>
         <activity
             android:id="@+id/search_screen"
-            android:name="Search"
+            android:name=".Search"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:hardwareAccelerated="false"
             android:label="@string/search_name"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:hardwareAccelerated="false" >
-        </activity>
-
+            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
         <activity
             android:id="@+id/format_screen"
-            android:name="Format"
+            android:name=".Format"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="@string/format_name" >
-        </activity>
-
+            android:label="@string/format_name"></activity>
         <activity
             android:id="@+id/help_screen"
-            android:name="Help"
+            android:name=".Help"
             android:label="@string/help_name"
-            android:windowSoftInputMode="stateAlwaysVisible" >
-        </activity>
-
+            android:windowSoftInputMode="stateAlwaysVisible"></activity>
         <activity
             android:id="@+id/gr_screen"
-            android:name="GR"
+            android:name=".GR"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/gr_name"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
-
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:id="@+id/select_screen"
-            android:name="Select"
+            android:name=".Select"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="@string/select_name" >
-        </activity>
-
+            android:label="@string/select_name"></activity>
         <activity
             android:id="@+id/text_input_screen"
-            android:name="TextInput"
+            android:name=".TextInput"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="@string/textinput_name" >
-        </activity>
-
+            android:label="@string/textinput_name"></activity>
         <activity
             android:id="@+id/text_get_screen"
-            android:name="TGet"
+            android:name=".TGet"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/textinput_name"
-            android:windowSoftInputMode="stateVisible|adjustResize" >
-        </activity>
-
+            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
         <activity
             android:id="@+id/web_view_screen"
-            android:name="Web"
+            android:name=".Web"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/web_view_name"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
-
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:id="@+id/camera_screen"
-            android:name="CameraView"
+            android:name=".CameraView"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="Camera"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
         <activity
             android:id="@+id/notify_screen"
-            android:name="HandleNotify"
+            android:name=".HandleNotify"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="Notify"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
         <activity
             android:id="@+id/device_list_screen"
-            android:name="DeviceListActivity"
+            android:name=".DeviceListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/select_device"
-            android:theme="@android:style/Theme.Dialog" >
-        </activity>
-
+            android:theme="@android:style/Theme.Dialog"></activity>
         <activity
-            android:name="Null"
-            android:label="@string/select_name" >
-        </activity>
+            android:name=".Null"
+            android:label="@string/select_name"></activity>
 
-        <uses-library android:name="com.sec.android.app.multiwindow" android:required="false" />
-        <meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
-        <meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W" android:value="632.0dip" />
-        <meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H" android:value="598.0dip" />
-        <meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:value="632.0dip" />
-        <meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:value="598.0dip" />
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <uses-library
+            android:name="com.sec.android.app.multiwindow"
+            android:required="false" />
+
+        <meta-data
+            android:name="com.sec.android.support.multiwindow"
+            android:value="true" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W"
+            android:value="632.0dip" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H"
+            android:value="598.0dip" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W"
+            android:value="632.0dip" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H"
+            android:value="598.0dip" />
+
+        <activity android:name=".Notifcm">
+            <intent-filter >
+                <action android:name="com.rfo.basic.fcmnotfi"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
